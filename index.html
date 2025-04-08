@@ -1,21 +1,3 @@
-<?php
-$host = 'localhost';
-$user = 'root';
-$pass = 'root';
-$db = 'librarymanagement';
-
-$conn = mysqli_connect($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch data from books table
-$booksData = mysqli_query($conn, "SELECT * FROM books");
-
-// Fetch data from borrower table
-$borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,18 +6,17 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
     <title>Library Management</title>
     <style>
         body {
-    background-color: #1E3D59; /* Dark blue background */
-    color: white;
-    font-family: Arial, sans-serif;
-    background-image: url('1.jpg'); /* Adjust the path if needed */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the background image */
-    background-attachment: fixed; /* Makes the background stay fixed while scrolling */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* Ensures the body takes up the full height of the viewport */
-    margin: 0; /* Removes default margin */
-}
-
+            background-color: #1E3D59; /* Dark blue background */
+            color: white;
+            font-family: Arial, sans-serif;
+            background-image: url('1.jpg'); /* Adjust the path if needed */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the background image */
+            background-attachment: fixed; /* Makes the background stay fixed while scrolling */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            height: 100vh; /* Ensures the body takes up the full height of the viewport */
+            margin: 0; /* Removes default margin */
+        }
 
         .navbar {
             background-color: #3E4E5E;
@@ -56,24 +37,23 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
             text-decoration: none;
         }
         .main-title {
-    text-align: center;
-    margin-top: 20px; /* Add some space after the navbar */
-}
+            text-align: center;
+            margin-top: 20px; /* Add some space after the navbar */
+        }
 
-.title-box {
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
-    padding: 15px 30px; /* Adds padding around the text */
-    border-radius: 10px; /* Rounded corners for the box */
-}
+        .title-box {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
+            padding: 15px 30px; /* Adds padding around the text */
+            border-radius: 10px; /* Rounded corners for the box */
+        }
 
-.title-box h1 {
-    font-size: 2.5em;
-    color:rgb(178, 232, 246); /* Gold color for the title */
-    margin: 0; /* Remove default margin */
-    font-family: 'Arial', sans-serif;
-}
-
+        .title-box h1 {
+            font-size: 2.5em;
+            color: rgb(178, 232, 246); /* Gold color for the title */
+            margin: 0; /* Remove default margin */
+            font-family: 'Arial', sans-serif;
+        }
 
         .container {
             display: flex;
@@ -116,13 +96,11 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
     </div>
 
     <!-- Library Management Title -->
-    <!-- Library Management Title with background box -->
-<div class="main-title">
-    <div class="title-box">
-        <h1>Library Management</h1>
+    <div class="main-title">
+        <div class="title-box">
+            <h1>Library Management</h1>
+        </div>
     </div>
-</div>
-
 
     <div class="container">
         <!-- Books Table -->
@@ -140,16 +118,23 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($booksData)) { ?>
-                        <tr>
-                            <td><?php echo $row['book_id']; ?></td>
-                            <td><?php echo $row['book_title']; ?></td>
-                            <td><?php echo $row['rack']; ?></td>
-                            <td><?php echo $row['book_located']; ?></td>
-                            <td><?php echo $row['time_date']; ?></td>
-                            <td><?php echo $row['book_status'] ? 'Available' : 'Checked Out'; ?></td>
-                        </tr>
-                    <?php } ?>
+                    <!-- Sample Data -->
+                    <tr>
+                        <td>1</td>
+                        <td>Sample Book 1</td>
+                        <td>A1</td>
+                        <td>Rack 1</td>
+                        <td>2025-04-08 12:00:00</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sample Book 2</td>
+                        <td>A2</td>
+                        <td>Rack 2</td>
+                        <td>2025-04-08 13:00:00</td>
+                        <td>Checked Out</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -169,20 +154,10 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($borrowerData)) { ?>
-                        <tr>
-                            <td><?php echo $row['username']; ?></td>
-                            <td><?php echo $row['book_id']; ?></td>
-                            <td><?php echo $row['phone_number']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['time_date']; ?></td>
-                            <td><?php echo $row['returnbook']; ?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</body>
-</html>
+                    <!-- Sample Data -->
+                    <tr>
+                        <td>JohnDoe</td>
+                        <td>1</td>
+                        <td>123-456-7890</td>
+                        <td>johndoe@example.com</td>
+                        <td>2025-04-08 12:00:00</td>
