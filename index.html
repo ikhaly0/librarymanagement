@@ -4,15 +4,16 @@ $user = 'root';
 $pass = 'root';
 $db = 'librarymanagement';
 
+// Connect to the database
 $conn = mysqli_connect($host, $user, $pass, $db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch data from books table
+// Fetch data from the books table
 $booksData = mysqli_query($conn, "SELECT * FROM books");
 
-// Fetch data from borrower table
+// Fetch data from the borrower table
 $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
 ?>
 
@@ -23,63 +24,70 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management</title>
     <style>
+        /* General Styling */
         body {
-    background-color: #1E3D59; /* Dark blue background */
-    color: white;
-    font-family: Arial, sans-serif;
-    background-image: url('1.jpg'); /* Adjust the path if needed */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the background image */
-    background-attachment: fixed; /* Makes the background stay fixed while scrolling */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* Ensures the body takes up the full height of the viewport */
-    margin: 0; /* Removes default margin */
-}
+            background-color: #1E3D59; /* Dark blue background */
+            color: white;
+            font-family: Arial, sans-serif;
+            background-image: url('1.jpg'); /* Background image */
+            background-size: cover; /* Ensure the background covers the screen */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Fixed background on scroll */
+            background-repeat: no-repeat; /* Prevent image repeat */
+            height: 100vh; /* Full height */
+            margin: 0; /* Remove default margin */
+        }
 
-
+        /* Navbar Styling */
         .navbar {
             background-color: #3E4E5E;
             padding: 10px;
             text-align: center;
         }
+
         .navbar nav ul {
             list-style-type: none;
             padding: 0;
             display: inline-block;
         }
+
         .navbar nav ul li {
             display: inline;
             margin-right: 20px;
         }
+
         .navbar nav ul li a {
             color: white;
             text-decoration: none;
         }
+
+        /* Main Title Styling */
         .main-title {
-    text-align: center;
-    margin-top: 20px; /* Add some space after the navbar */
-}
+            text-align: center;
+            margin-top: 20px;
+        }
 
-.title-box {
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
-    padding: 15px 30px; /* Adds padding around the text */
-    border-radius: 10px; /* Rounded corners for the box */
-}
+        .title-box {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            padding: 15px 30px;
+            border-radius: 10px;
+        }
 
-.title-box h1 {
-    font-size: 2.5em;
-    color:rgb(178, 232, 246); /* Gold color for the title */
-    margin: 0; /* Remove default margin */
-    font-family: 'Arial', sans-serif;
-}
+        .title-box h1 {
+            font-size: 2.5em;
+            color: rgb(178, 232, 246); /* Soft gold color */
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
 
-
+        /* Container for Tables */
         .container {
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
         }
+
         .box {
             background-color: #2A4D69;
             padding: 20px;
@@ -87,25 +95,31 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
             width: 45%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         .box h2 {
             margin-top: 0;
         }
+
+        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #4A6572;
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <nav>
             <ul>
@@ -116,14 +130,13 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
     </div>
 
     <!-- Library Management Title -->
-    <!-- Library Management Title with background box -->
-<div class="main-title">
-    <div class="title-box">
-        <h1>Library Management</h1>
+    <div class="main-title">
+        <div class="title-box">
+            <h1>Library Management</h1>
+        </div>
     </div>
-</div>
 
-
+    <!-- Main Content -->
     <div class="container">
         <!-- Books Table -->
         <div class="box">
@@ -152,37 +165,3 @@ $borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
                     <?php } ?>
                 </tbody>
             </table>
-        </div>
-
-        <!-- Borrowers Table -->
-        <div class="box">
-            <h2>Borrowers</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Book ID</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Borrow Date</th>
-                        <th>Return Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($borrowerData)) { ?>
-                        <tr>
-                            <td><?php echo $row['username']; ?></td>
-                            <td><?php echo $row['book_id']; ?></td>
-                            <td><?php echo $row['phone_number']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['time_date']; ?></td>
-                            <td><?php echo $row['returnbook']; ?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</body>
-</html>
