@@ -1,0 +1,188 @@
+<?php
+$host = 'localhost';
+$user = 'root';
+$pass = 'root';
+$db = 'librarymanagement';
+
+$conn = mysqli_connect($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from books table
+$booksData = mysqli_query($conn, "SELECT * FROM books");
+
+// Fetch data from borrower table
+$borrowerData = mysqli_query($conn, "SELECT * FROM borrower");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <style>
+        body {
+    background-color: #1E3D59; /* Dark blue background */
+    color: white;
+    font-family: Arial, sans-serif;
+    background-image: url('1.jpg'); /* Adjust the path if needed */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Makes the background stay fixed while scrolling */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Ensures the body takes up the full height of the viewport */
+    margin: 0; /* Removes default margin */
+}
+
+
+        .navbar {
+            background-color: #3E4E5E;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: inline-block;
+        }
+        .navbar nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .main-title {
+    text-align: center;
+    margin-top: 20px; /* Add some space after the navbar */
+}
+
+.title-box {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
+    padding: 15px 30px; /* Adds padding around the text */
+    border-radius: 10px; /* Rounded corners for the box */
+}
+
+.title-box h1 {
+    font-size: 2.5em;
+    color:rgb(178, 232, 246); /* Gold color for the title */
+    margin: 0; /* Remove default margin */
+    font-family: 'Arial', sans-serif;
+}
+
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #2A4D69;
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .box h2 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4A6572;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="form.php">Borrower Form</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Library Management Title -->
+    <!-- Library Management Title with background box -->
+<div class="main-title">
+    <div class="title-box">
+        <h1>Library Management</h1>
+    </div>
+</div>
+
+
+    <div class="container">
+        <!-- Books Table -->
+        <div class="box">
+            <h2>Books</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book ID</th>
+                        <th>Title</th>
+                        <th>Rack</th>
+                        <th>Location</th>
+                        <th>Timestamp</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($booksData)) { ?>
+                        <tr>
+                            <td><?php echo $row['book_id']; ?></td>
+                            <td><?php echo $row['book_title']; ?></td>
+                            <td><?php echo $row['rack']; ?></td>
+                            <td><?php echo $row['book_located']; ?></td>
+                            <td><?php echo $row['time_date']; ?></td>
+                            <td><?php echo $row['book_status'] ? 'Available' : 'Checked Out'; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Borrowers Table -->
+        <div class="box">
+            <h2>Borrowers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Book ID</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Borrow Date</th>
+                        <th>Return Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($borrowerData)) { ?>
+                        <tr>
+                            <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['book_id']; ?></td>
+                            <td><?php echo $row['phone_number']; ?></td>
+                            <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $row['time_date']; ?></td>
+                            <td><?php echo $row['returnbook']; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
